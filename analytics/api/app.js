@@ -1,6 +1,8 @@
 // Serves the dashboard shell only to signed-in users.
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const HERE = path.dirname(fileURLToPath(import.meta.url));
 import { isAuthed } from './_lib/auth.js';
 
 let html = null;
@@ -10,7 +12,7 @@ export default function handler(req, res) {
     res.setHeader('Location', '/login');
     return res.status(302).end();
   }
-  if (!html) html = fs.readFileSync(path.join(process.cwd(), 'private', 'dashboard.html'), 'utf8');
+  if (!html) html = fs.readFileSync(path.join(HERE, '..', 'private', 'dashboard.html'), 'utf8');
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   return res.status(200).send(html);
 }
