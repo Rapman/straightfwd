@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Inloggen · Straightfwd Analytics</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Unbounded:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box} html,body{margin:0;height:100%}
+  body{font-family:Montserrat,system-ui,sans-serif;background:#070B24;color:#fff;display:grid;place-items:center;padding:24px;overflow:hidden}
+  body::before{content:'';position:fixed;inset:-20%;background:radial-gradient(40% 40% at 25% 30%,rgba(45,60,255,.55),transparent 70%),radial-gradient(35% 35% at 80% 75%,rgba(255,184,224,.35),transparent 70%);filter:blur(10px);animation:drift 18s ease-in-out infinite alternate}
+  @keyframes drift{to{transform:translate3d(4%,-3%,0) scale(1.05)}}
+  .box{position:relative;width:100%;max-width:400px;background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:28px;padding:36px 32px 30px;box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
+  .brand{display:flex;align-items:center;gap:10px;margin-bottom:26px}
+  .brand .w{font-family:Unbounded,Montserrat,sans-serif;font-weight:800;font-size:19px}
+  .brand .w b{color:#8A93FF}
+  h1{font-family:Unbounded,Montserrat,sans-serif;font-weight:700;font-size:24px;margin:0 0 6px;letter-spacing:-.01em}
+  p{margin:0 0 22px;color:#C3C7E0;font-size:14px}
+  label{font-size:13px;font-weight:600;color:#C3C7E0;display:block;margin-bottom:6px}
+  input{width:100%;font:inherit;font-size:15px;padding:13px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(7,11,36,.55);color:#fff;outline:none}
+  input:focus{border-color:#8A93FF;box-shadow:0 0 0 4px rgba(45,60,255,.35)}
+  button{margin-top:14px;width:100%;font:inherit;font-weight:700;font-size:15px;padding:13px;border:0;border-radius:999px;background:#2D3CFF;color:#fff;cursor:pointer;position:relative;overflow:hidden}
+  button:hover{background:#3B49FF}
+  button:disabled{opacity:.6}
+  .err{min-height:20px;color:#FFB8E0;font-size:13px;margin-top:10px;font-weight:600}
+</style>
+</head>
+<body>
+  <form class="box" id="f">
+    <div class="brand"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4C59FF"/><stop offset="1" stop-color="#1C27C7"/></linearGradient></defs><path d="M7 3h18a5 5 0 0 1 5 5v11a5 5 0 0 1-5 5H15l-7 5.5V24H7a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5z" fill="url(#lg)"/><path d="M9.5 13.5h12m-4.5-4.5 4.5 4.5-4.5 4.5" stroke="#fff" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="w">Straight<b>fwd</b></span></div>
+    <h1>Analytics</h1>
+    <p>Log in om de cijfers van straightfwd.nl te bekijken.</p>
+    <label for="pw">Wachtwoord</label>
+    <input id="pw" name="password" type="password" autocomplete="current-password" required autofocus>
+    <button id="b" type="submit">Inloggen</button>
+    <div class="err" id="e" role="alert"></div>
+  </form>
+<script>
+document.getElementById('f').addEventListener('submit', async function (e) {
+  e.preventDefault();
+  var b = document.getElementById('b'), er = document.getElementById('e');
+  b.disabled = true; er.textContent = '';
+  try {
+    var r = await fetch('/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: document.getElementById('pw').value }) });
+    if (r.ok) { location.href = '/' + (location.hash || ''); return; }
+    er.textContent = r.status === 429 ? 'Te veel pogingen. Probeer het over een kwartier opnieuw.' : r.status === 503 ? 'Er is nog geen wachtwoord ingesteld.' : 'Dat wachtwoord klopt niet.';
+  } catch (x) { er.textContent = 'Geen verbinding. Probeer het opnieuw.'; }
+  b.disabled = false;
+});
+</script>
+</body>
+</html>

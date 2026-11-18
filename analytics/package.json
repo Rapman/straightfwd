@@ -1,0 +1,10 @@
+{
+  "name": "straightfwd-analytics",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "postgres": "^3.4.5"
+  }
+}

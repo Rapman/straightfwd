@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Straightfwd Analytics</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Unbounded:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/app.css?v=1">
+<script>try{var t=localStorage.getItem('sfa_theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="/#tab=overzicht"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4C59FF"/><stop offset="1" stop-color="#1C27C7"/></linearGradient></defs><path d="M7 3h18a5 5 0 0 1 5 5v11a5 5 0 0 1-5 5H15l-7 5.5V24H7a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5z" fill="url(#lg)"/><path d="M9.5 13.5h12m-4.5-4.5 4.5 4.5-4.5 4.5" stroke="#fff" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="word">Straight<b>fwd</b></span><span class="tag">Analytics</span></a>
+    <select class="site-select" id="siteSel" aria-label="Website">
+      <option value="straightfwd.nl">straightfwd.nl</option>
+      <option value="software.straightfwd.nl">software.straightfwd.nl</option>
+    </select>
+    <span class="spacer"></span>
+    <button class="live-pill" id="livePill" type="button"><span class="live-dot off" id="liveDot"></span><span id="liveN">–</span></button>
+    <button class="icon-btn" id="refresh" type="button" title="Vernieuwen" aria-label="Vernieuwen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg></button>
+    <button class="icon-btn" id="theme" type="button" title="Licht/donker" aria-label="Wissel licht en donker"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg></button>
+    <button class="icon-btn" id="logout" type="button" title="Uitloggen" aria-label="Uitloggen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h4v16h-4M10 16l4-4-4-4M14 12H3"/></svg></button>
+  </div>
+</header>
+<main class="wrap">
+  <div class="controls">
+    <div class="seg" id="presets" role="group" aria-label="Periode"></div>
+    <div class="custom-range" id="custom">
+      <input type="date" id="from" aria-label="Van"><span class="muted">–</span><input type="date" id="to" aria-label="Tot en met">
+      <button class="pill-btn" id="applyRange" type="button">Toon</button>
+    </div>
+    <button class="toggle" id="compare" type="button" aria-pressed="true"><span class="sw"></span>Vergelijk met vorige periode</button>
+    <span class="range-label" id="rangeLabel"></span>
+  </div>
+  <div class="chips" id="chips"></div>
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Onderdelen"></nav>
+  <div id="view"></div>
+  <div class="foot">Straightfwd Analytics · first-party, zonder cookies · data blijft van jou</div>
+</main>
+<script src="/charts.js?v=1"></script>
+<script src="/app.js?v=1"></script>
+</body>
+</html>
