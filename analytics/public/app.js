@@ -49,6 +49,218 @@
   }
   const CH_ICON = { Direct: '↗', Zoekmachine: '⌕', LinkedIn: 'in', 'AI-assistent': '✦', 'Social (overig)': '◎', Jobboards: '▤', 'E-mail': '✉', Betaald: '€', 'Eigen sites': '⌂', Verwijzing: '⇢' };
 
+  // ---------------------------------------------------------------- uitleg (?-icoontjes)
+  // TERM: kolomkoppen en tegels · CARD: kaarttitels · GOAL: doelen · FUNNEL: funnelstappen
+  const T_BEZ = 'Unieke bezoekers (anoniem). Met statistiek-toestemming herkennen we iemand die later terugkomt. Zonder toestemming telt elk nieuw tabblad als nieuwe bezoeker, dus dit getal valt dan wat hoger uit.';
+  const T_PV = 'Hoe vaak een pagina is geladen. Bekijkt iemand drie pagina’s, dan zijn dat drie weergaven.';
+  const T_CONV = 'Aandeel sessies met minstens één lead (opdrachtgever of kandidaat): sessies met een lead ÷ alle sessies. Voorbeeld: 4 van de 200 sessies = 2%.';
+  const T_SCROLL = 'Gemiddeld hoe ver bezoekers op deze pagina naar beneden scrolden, als percentage van de paginalengte (100% = helemaal onderaan).';
+  const T_SOLL = 'Verstuurde sollicitaties en cv-uploads die goed zijn aangekomen.';
+  const T_P75 = ' Het grote getal is het 75e percentiel: 3 van de 4 bezoeken waren minstens zo snel. De balk toont welk deel goed, matig of slecht was. Gemeten bij echte bezoekers op hun eigen apparaat.';
+  const TERM = {
+    'Bezoekers': T_BEZ, 'Bez.': T_BEZ,
+    'Sessies': 'Eén bezoek aan de site, van binnenkomst tot vertrek. Na 30 minuten zonder activiteit begint een nieuwe sessie. Eén bezoeker kan dus meerdere sessies hebben.',
+    'Paginaweergaven': T_PV, 'Weergaven': T_PV, 'Weerg.': T_PV,
+    'Gem. actieve tijd per sessie': 'Gemiddelde tijd per sessie dat het tabblad zichtbaar was én de bezoeker iets deed (scrollen, bewegen, typen). Een tabblad dat op de achtergrond openstaat telt niet mee.',
+    'Actieve tijd': 'Gemiddelde actieve tijd per paginaweergave: hoe lang het tabblad zichtbaar was en de bezoeker actief was op deze pagina.',
+    'Bouncepercentage': 'Aandeel sessies dat meteen weer weg was: één pagina, korter dan 10 seconden en nergens op geklikt. Lager is beter.',
+    'Conversieratio': T_CONV, 'Conversie': T_CONV, 'Conv.': T_CONV,
+    'Leads': 'Formulieren die goed zijn aangekomen: aanvragen van opdrachtgevers plus sollicitaties en cv-uploads van kandidaten. Mislukte verzendingen tellen niet mee.',
+    'Aandeel': 'Welk deel van alle sessies via dit kanaal binnenkwam.',
+    'Instappen': 'Hoe vaak een bezoek op deze pagina begon (de pagina was de landingspagina).',
+    'Uitstap': 'Uitstappercentage: van alle weergaven van deze pagina, het deel waarna de bezoeker de site verliet. Op een bedankpagina is dat normaal, op een dienstpagina een signaal om te verbeteren.',
+    'Uitstappen': 'Hoe vaak dit de laatste pagina van een bezoek was.',
+    'Ratio': 'Uitstappen ÷ weergaven van deze pagina: hoe vaak een weergave het einde van het bezoek was.',
+    'Scrolldiepte': T_SCROLL, 'Scroll': T_SCROLL,
+    'Klikken': 'Aantal klikken, ook meerdere klikken van dezelfde bezoeker.',
+    'Keer': 'Hoe vaak dit gebeurde in de gekozen periode.',
+    'Opdr.': 'Leads van opdrachtgevers: bedrijven die via een formulier een aanvraag deden.',
+    'Kand.': 'Leads van kandidaten: sollicitaties en cv-uploads.',
+    'Soll.': T_SOLL, 'Sollicitaties': T_SOLL,
+    'Bereikt': 'Deel van de weergaven waarin de bezoeker minstens tot dit punt van de pagina scrolde.',
+    'Tijd': 'Gemiddelde tijd dat deze sectie in beeld was terwijl de bezoeker actief was, bij de bezoekers die de sectie zagen.',
+    'Zag het': 'Deel van de weergaven waarin deze sectie minstens een seconde grotendeels in beeld was.',
+    'In beeld': 'Hoe vaak het formulier op het scherm verscheen (per paginaweergave).',
+    'Gestart': 'Hoe vaak iemand begon met invullen (eerste veld aangeklikt of getypt).',
+    'Startratio': 'Gestart ÷ in beeld: welk deel van de mensen die het formulier zagen, ook begon met invullen.',
+    'Verstuurd': 'Hoe vaak er op versturen is gedrukt.',
+    'Gelukt': 'Verzendingen die goed aankwamen (de server bevestigde ze). Dit zijn je leads.',
+    'Mislukt': 'Verzendingen die een foutmelding gaven. Elke mislukte verzending is mogelijk een gemiste lead.',
+    'Afgehaakt': 'Hoe vaak iemand begon met invullen maar de pagina verliet zonder te versturen.',
+    'Afronding': 'Gelukt ÷ gestart: welk deel van de mensen die begonnen, het formulier ook echt verstuurde.',
+    'Invultijd': 'Gemiddelde tijd van het eerste veld tot een geslaagde verzending.',
+    'Gebruikt': 'Hoe vaak dit veld is aangeklikt of ingevuld, in verstuurde én afgebroken formulieren.',
+    'Gem. tijd in veld': 'Gemiddeld aantal seconden dat iemand met dit veld bezig was. Lang kan wijzen op een lastige of onduidelijke vraag.',
+    'Opnieuw aangeklikt': 'Hoe vaak iemand later terugging naar dit veld. Boven 30% (oranje) wijst vaak op een onduidelijke vraag of een foutmelding.',
+    'Laatste veld bij afhaken': 'Hoe vaak dit het laatst aangeraakte veld was voordat iemand afhaakte. Hier verlies je mensen.',
+    'Form. gezien': 'Hoe vaak het sollicitatieformulier op deze vacature in beeld kwam.',
+    'Gedeeld': 'Hoe vaak de vacature of pagina is gedeeld via de deelknop.',
+    'Grootste bron': 'Het kanaal waarlangs deze vacature de meeste weergaven kreeg.',
+    'Metingen': 'Aantal snelheidsmetingen bij echte bezoekers op deze pagina.',
+    'LCP': 'Largest Contentful Paint: hoe snel het grootste blok (meestal de hero-afbeelding of kop) zichtbaar is. Goed: onder 2,5 s. Slecht: boven 4 s.',
+    'INP': 'Interaction to Next Paint: hoe snel de pagina zichtbaar reageert op een klik of tik. Goed: onder 200 ms. Slecht: boven 500 ms.',
+    'CLS': 'Cumulative Layout Shift: hoeveel de pagina verspringt tijdens het laden, bijvoorbeeld knoppen die wegschuiven. Goed: onder 0,1. Slecht: boven 0,25.',
+    'FCP': 'First Contentful Paint: wanneer de eerste tekst of afbeelding verschijnt. Goed: onder 1,8 s. Slecht: boven 3 s.',
+    'TTFB': 'Time to First Byte: hoe snel de server begint te antwoorden. Goed: onder 0,8 s. Slecht: boven 1,8 s.',
+    'Element': 'De knop, link of het blok waarop geklikt is, met de tekst die erop staat.',
+    'Laatst': 'Wanneer dit voor het laatst gebeurde.',
+    'Verwezen vanaf': 'De pagina of website waar de kapotte link op staat.',
+    'Fout': 'Script = een JavaScript-fout. Bestand = iets dat niet laadde (afbeelding, lettertype of script).',
+    'Leads opdrachtgevers': 'Aanvragen van bedrijven via een formulier op de site die goed zijn aangekomen.',
+    'Leads kandidaten': 'Sollicitaties op vacatures, Fwd Match-uploads en "Werken bij Straightfwd".',
+    'Formulier gestart → verstuurd': 'Van de mensen die een formulier begonnen in te vullen: welk deel drukte ook op versturen.',
+    'Formulier gezien → gestart': 'Van de mensen bij wie een formulier in beeld kwam: welk deel begon met invullen.',
+    'Gem. dagen tot lead': 'Gemiddeld aantal dagen tussen het eerste bezoek en de lead. Alleen bezoekers met statistiek-toestemming.',
+    'Gem. bezoeken tot lead': 'Gemiddeld aantal bezoeken tot en met het bezoek waarin de lead binnenkwam. Alleen bezoekers met statistiek-toestemming.',
+    'Mislukte verzendingen': 'Het formulier gaf een foutmelding. Elke mislukte verzending is mogelijk een gemiste lead: check of het formulier werkt.',
+    'Vacatureweergaven': 'Weergaven van alle losse vacaturepagina’s samen, zonder de overzichtspagina.',
+    'Overzichtspagina': 'Weergaven van de pagina /vacatures met het overzicht van alle vacatures.',
+    'Conversie vacature': 'Sollicitaties op vacaturepagina’s ÷ vacatureweergaven. Bij 2% leveren 100 weergaven 2 sollicitaties op.',
+    'Fwd Match-bezoekers': 'Unieke bezoekers van de Fwd Match-pagina’s.',
+    'Fwd Match-uploads': 'Cv’s die via Fwd Match zijn verstuurd en goed aankwamen.',
+    'Klikken per weergave': 'Gemiddeld aantal klikken per keer dat de pagina bekeken werd.',
+    'Gem. scrolldiepte': T_SCROLL,
+    'Haalt de onderkant': 'Deel van de weergaven waarin iemand tot helemaal onderaan de pagina scrolde.',
+    'Frustratieklikken': 'Drie of meer snelle klikken op dezelfde plek: iemand verwacht dat er iets gebeurt, maar dat gebeurt niet (snel genoeg).',
+    'Dode klikken': 'Klik op iets dat klikbaar lijkt (handje, kaart, afbeelding) maar waarna er niets gebeurt.',
+  };
+  const CARD = {
+    'Verloop': 'De gekozen meting door de tijd. Kies boven de grafiek bezoekers, sessies, weergaven of leads. De grijze lijn is de vorige periode van dezelfde lengte. Met "+ Notitie" markeer je een moment, zoals een LinkedIn-post, zodat je het effect ziet.',
+    'Kanalen': 'Via welke weg bezoekers binnenkwamen: Direct (getypt of bladwijzer), Zoekmachine, LinkedIn, AI-assistent, jobboards, e-mail enzovoort. Conversie = aandeel sessies met een lead. Klik op een kanaal om het hele dashboard daarop te filteren.',
+    'Populairste pagina’s': 'De meest bekeken pagina’s. Weerg. = aantal keer geladen, Bez. = unieke bezoekers. Klik op een pagina om te filteren.',
+    'Interesse per dienst': 'Per dienst: hoeveel unieke bezoekers de dienstpagina bekeken en hoeveel leads er via het formulier op die pagina binnenkwamen. Zo zie je welke dienst het meest leeft.',
+    'Funnel opdrachtgevers': 'De stappen van bezoek naar aanvraag. Per stap het aantal sessies dat die stap haalde en welk deel van de vorige stap doorging. De grootste daling is je grootste lek.',
+    'Funnel kandidaten': 'De stappen van bezoek naar sollicitatie, voor vacatures en Fwd Match. Per stap het aantal sessies dat die stap haalde en welk deel van de vorige stap doorging.',
+    'Laatste conversies': 'De nieuwste leads en belangrijke acties (zoals klikken op e-mail of kennismaking), met pagina, bron, apparaat en plaats. Anoniem: wat er is ingevuld zie je nooit.',
+    'Doelen': 'Acties die op interesse wijzen, ook als er (nog) geen formulier is verstuurd. Het percentage is de verandering ten opzichte van de vorige periode.',
+    'LinkedIn-impact': 'Alles wat via LinkedIn binnenkwam: posts, profiel, bedrijfspagina en de LinkedIn-app. Bij de landingspagina’s zie je naar welke pagina’s je posts mensen stuurden.',
+    'Campagnes (UTM)': 'Bezoeken via links met utm-tags, zoals de links uit "Campagnelink maken" bij Instellingen. Per campagne zie je sessies en leads, dus wat een specifieke post of mail opleverde.',
+    'Verwijzende websites': 'Websites waar iemand op een link naar je site klikte. Direct verkeer en je eigen pagina’s tellen niet mee.',
+    'AI-assistenten (GEO)': 'Bezoek via een link in ChatGPT, Perplexity, Gemini, Copilot of Claude. GEO (generative engine optimization) gaat over vindbaar zijn in AI-antwoorden, zoals SEO dat doet voor Google.',
+    'Zoekmachines': 'Bezoek via de zoekresultaten van Google, Bing, DuckDuckGo en andere zoekmachines.',
+    'Landingspagina’s': 'De eerste pagina van een bezoek: waar mensen binnenkomen. Veel sessies maar weinig leads? Dan valt daar het meest te winnen.',
+    'Paginagroepen': 'Pagina’s samengevoegd per soort (diensten, vacatures, Fwd Match, contact …), zodat je onderwerpen vergelijkt in plaats van losse URL’s.',
+    'Alle pagina’s': 'Elke pagina met weergaven, actieve tijd, scrolldiepte, instappen, uitstappercentage en leads. Klik op een kolomkop om te sorteren en op een pagina om te filteren.',
+    'Scrolldiepte': 'Verdeling van de paginaweergaven naar hoe ver er gescrold is. Een hoge staaf bij 0–25% betekent dat veel bezoekers alleen het bovenste stuk zien: zet je belangrijkste boodschap en knop dan hoog op de pagina.',
+    'Actieve tijd per sessie': 'Verdeling van sessies naar actieve tijd (tabblad zichtbaar en bezoeker actief). Veel sessies onder 10 seconden betekent dat mensen niet snel genoeg vinden wat ze zoeken.',
+    'Populaire routes': 'Welke pagina’s bezoekers direct na elkaar bekeken (van → naar), en hoe vaak.',
+    'Uitstappagina’s': 'Pagina’s waar bezoeken eindigden. Ratio = uitstappen ÷ weergaven van die pagina.',
+    'Knoppen & links (CTA’s)': 'Klikken op knoppen en links in de inhoud van je pagina’s en formulieren. Bez. = hoeveel verschillende bezoekers erop klikten.',
+    'Menu & footer': 'Klikken in de header, het menu en de footer. Laat zien hoe mensen door de site navigeren.',
+    'Uitgaande links': 'Klikken op links naar andere websites, zoals LinkedIn, de Software-site of partners.',
+    'Contact-acties': 'Klikken op je e-mailadres of telefoonnummer, plus tekst die bezoekers kopieerden (bijvoorbeeld je e-mailadres).',
+    'Downloads': 'Gedownloade bestanden, zoals je onepager.',
+    'Eigen events': 'Extra metingen die je zelf toevoegt met data-sf-event of sfTrack() (zie Instellingen).',
+    'Formulieren': 'Per formulier de stappen van in beeld tot gelukt. Startratio = gestart ÷ in beeld. Afronding = gelukt ÷ gestart. Mislukt = foutmelding bij versturen.',
+    'Veldanalyse': 'Per invulveld: hoe vaak het gebruikt is, hoe lang mensen erover doen, hoe vaak ze terugkeren en bij welk veld ze afhaken. Zo vind je de vraag die mensen tegenhoudt.',
+    'Leads naar eerste bron': 'Via welk kanaal een lead de allereerste keer op je site kwam (first touch): waar mensen je ontdekken. Zonder statistiek-toestemming zien we eerdere bezoeken niet; dan telt het kanaal van dat bezoek.',
+    'Leads naar laatste bron': 'Via welk kanaal het bezoek binnenkwam waarin de lead het formulier verstuurde (last touch): wat mensen over de streep trekt.',
+    'Eerste landingspagina van leads': 'Op welke pagina leads de allereerste keer binnenkwamen.',
+    'Gekozen onderwerp': 'Wat leads kozen in de keuzevelden van het formulier, bijvoorbeeld welke dienst. Alleen keuzes, nooit vrije tekst.',
+    'Waar haken mensen af?': 'Het laatste veld dat iemand aanraakte voordat hij het formulier verliet zonder te versturen.',
+    'Campagnes die leads brachten': 'De utm_campaign van het allereerste bezoek van leads: welke campagnelinks uiteindelijk leads opleverden, ook als de lead pas later kwam.',
+    'Alle leads': 'Alle leads en mislukte verzendingen in deze periode, nieuwste eerst, met pagina, bron en het hoeveelste bezoek het was.',
+    'Per vacature': 'Per vacaturepagina: weergaven, actieve tijd, hoe vaak het formulier in beeld kwam en gestart werd, sollicitaties, conversie (sollicitaties ÷ weergaven), keren gedeeld en het kanaal met de meeste weergaven.',
+    'Waar kandidaten vandaan komen': 'Via welk kanaal bezoekers op vacatures en Fwd Match kwamen, en hoeveel sollicitaties dat opleverde.',
+    'Apparaten': 'Sessies per apparaat (desktop, mobiel, tablet), met leads en conversie. Converteert mobiel slecht? Bekijk dan je formulieren op een telefoon.',
+    'Nieuw of terugkerend': 'Eerste bezoek of eerder geweest. Alleen herkenbaar bij bezoekers met statistiek-toestemming; zonder toestemming telt elk bezoek als nieuw.',
+    'Statistiek-toestemming': 'Welk deel van de sessies statistiek-cookies accepteerde in Cookiebot. Met toestemming herkennen we terugkerende bezoekers; zonder toestemming meten we het bezoek wel, maar anoniem per tabblad.',
+    'Provincies': 'Sessies per provincie, afgeleid van het IP-adres (het IP-adres zelf bewaren we niet). Donkerder = meer sessies. Klik op een provincie om te filteren.',
+    'Steden': 'Sessies en leads per stad, afgeleid van het IP-adres. Bij mobiel internet of een VPN kan de stad afwijken.',
+    'Landen': 'Sessies per land, afgeleid van het IP-adres.',
+    'Wanneer bezoekers komen': 'Wanneer sessies begonnen, per weekdag en uur (Nederlandse tijd). Donkerder = drukker. Plan je LinkedIn-posts vlak voor de drukke momenten.',
+    'Browsers': 'Sessies per browser. "LinkedIn-app" zijn bezoekers die je link in de LinkedIn-app openden.',
+    'Besturingssystemen': 'Sessies per besturingssysteem (Windows, macOS, iOS, Android …).',
+    'Schermformaten': 'Schermgrootte van bezoekers in pixels (breedte × hoogte). Handig om te weten op welke formaten je de site test.',
+    'Taal van de browser': 'De taal waarop de browser van de bezoeker staat ingesteld.',
+    'Terugkeer per week': 'Elke rij is een groep bezoekers die in die week voor het eerst kwam. Week +1 = welk deel de week erna terugkwam, enzovoort. Donkerder = meer terugkeer. Alleen bezoekers met statistiek-toestemming.',
+    'LCP': TERM.LCP + T_P75, 'INP': TERM.INP + T_P75, 'CLS': TERM.CLS + T_P75, 'FCP': TERM.FCP + T_P75, 'TTFB': TERM.TTFB + T_P75,
+    'Snelheid per pagina': 'Per pagina het 75e percentiel van elke snelheidsmeting: 3 van de 4 bezoeken waren minstens zo snel. ✓ = goed, ! = kan beter, ✕ = slecht. De ? bij elke kolom geeft de norm.',
+    'JavaScript- en laadfouten': 'Fouten in de browser van bezoekers. Script = een JavaScript-fout, Bestand = iets dat niet laadde. Het kan betekenen dat iets op die pagina niet werkt.',
+    'Pagina’s die niet bestaan (404)': 'Bezochte adressen die niet bestaan, met de site waar de kapotte link vandaan kwam. Repareer die link of maak een doorverwijzing.',
+    'Frustratieklikken': TERM['Frustratieklikken'] + ' Vaak een knop die traag reageert of iets dat op een knop lijkt. Klik op de pagina voor de heatmap.',
+    'Dode klikken': TERM['Dode klikken'] + ' Maak er een link van of haal de klikbare look weg.',
+    'Paginaweergaven per minuut': 'Hoeveel pagina’s er per minuut geladen zijn in het afgelopen half uur.',
+    'Wie is er nu?': 'De pagina waar elke actieve bezoeker nu is (actief in de laatste 5 minuten), met bron en plaats.',
+    'Live activiteit': 'Alles wat er de afgelopen 24 uur gebeurde: paginaweergaven, klikken, formulierstappen en fouten, nieuwste eerst.',
+    'Heatmap': 'Hoe bezoekers één pagina gebruiken. Kies de pagina en het apparaat. Klikken = waar er geklikt wordt, Scrollen = hoe ver mensen komen, Aandacht = welke secties het langst in beeld zijn.',
+    'Hoe ver wordt er gescrold?': 'Per punt op de pagina: welk deel van de weergaven zo ver kwam. De "vouw" is het stuk dat je ziet zonder te scrollen.',
+    'Aandacht per sectie': 'Per sectie: hoe lang die gemiddeld in beeld was (Tijd) en welk deel van de weergaven hem zag (Zag het). Lange tijd bij weinig bereik = goede inhoud die te laag staat.',
+    'Meest geklikt': 'De elementen met de meeste klikken op deze pagina. Het percentage is het deel van alle klikken. "geen link of knop" = er is geklikt op iets dat niet klikbaar is.',
+    'Bezoekersreizen': 'Elke sessie stap voor stap. Klik op een sessie om de tijdlijn te openen: pagina’s, klikken en formulierstappen, met de tijd sinds het begin van het bezoek (+m:ss).',
+  };
+  const GOAL_HELP = {
+    lead_opdrachtgever: TERM['Leads opdrachtgevers'], lead_kandidaat: TERM['Leads kandidaten'],
+    kennismaking_klik: 'Klikken op een knop om een kennismaking in te plannen. Een sterk signaal van interesse, ook als er (nog) geen formulier volgt.',
+    vacature_voorleggen_klik: 'Klikken op "vacature voorleggen": een bedrijf wil een vacature bij je neerleggen.',
+    mail: 'Klikken op je e-mailadres (opent het mailprogramma). Of de mail ook echt verstuurd is, kunnen we niet zien.',
+    bellen: 'Tikken of klikken op je telefoonnummer. Of er echt gebeld is, kunnen we niet zien.',
+    onepager: 'Downloads van je onepager.',
+    download: 'Downloads van andere bestanden.',
+    linkedin: 'Klikken naar je LinkedIn-profiel of bedrijfspagina.',
+    gedeeld: TERM['Gedeeld'],
+    software: 'Klikken naar software.straightfwd.nl.',
+    form_fout: 'Formulieren die een foutmelding gaven bij versturen. Mogelijk gemiste leads: check of het formulier werkt. Hier is lager beter.',
+  };
+  const FUNNEL = {
+    'Bezoek': 'Alle sessies in de gekozen periode: het startpunt (100%).',
+    'Dienst- of contactpagina': 'Sessies die minstens één dienstpagina of de contactpagina bekeken.',
+    'Vacature of Fwd Match': 'Sessies die minstens één vacature of Fwd Match-pagina bekeken.',
+    'Formulier in beeld': 'Sessies waarin een formulier op het scherm verscheen.',
+    'Formulier gestart': 'Sessies waarin iemand begon met invullen.',
+    'Formulier verstuurd': 'Sessies waarin op versturen is gedrukt.',
+    'Lead ontvangen': 'Sessies waarin de verzending goed aankwam: een echte lead. Verschil met de vorige stap = mislukte verzendingen.',
+  };
+  const HELP_MISC = {
+    compare: 'Vergelijkt elk cijfer met de periode ervoor van dezelfde lengte (bij 30 dagen: de 30 dagen daarvoor). ▲/▼ is de procentuele verandering; bij percentages het verschil in procentpunten (pp). Groen is gunstig, rood ongunstig.',
+    hero: 'Alle leads in de gekozen periode: aanvragen van opdrachtgevers plus sollicitaties en cv-uploads van kandidaten. Alleen verzendingen die goed aankwamen.',
+    live: 'Unieke bezoekers die in de laatste 5 minuten iets deden op de site.',
+    hmViewer: 'De pagina zoals hij nu is, met de metingen uit de gekozen periode erop. Klikken zitten vast aan het element waarop geklikt is, dus ze schuiven mee als de layout verandert.',
+    hmDevice: 'Kies het apparaat. Het getal is het aantal weergaven van deze pagina op dat apparaat; de heatmap toont alleen metingen van dat apparaattype.',
+    hmMode: 'Klikken: waar er geklikt wordt, warmer = vaker. Scrollen: hoe verder naar beneden, hoe minder bezoekers daar nog komen. Aandacht: warmer = langer in beeld.',
+    hmLayer: 'Alle klikken: alles. Frustratie: drie of meer snelle klikken op dezelfde plek. Dode klikken: klikken op iets dat klikbaar lijkt maar niets doet.',
+    sesKind: 'Met lead: er is een formulier goed verstuurd. Met formulier: iemand begon een formulier in te vullen. Terugkerend: de bezoeker was er eerder (alleen met toestemming). 3+ pagina’s: minstens drie paginaweergaven.',
+  };
+
+  let helpPop = null, helpPin = null, helpCur = null;
+  function showHelp(b) {
+    if (!helpPop) { helpPop = el('div', { class: 'help-pop', role: 'tooltip', id: 'sfa-help' }); document.body.append(helpPop); }
+    if (helpCur && helpCur !== b) helpCur.removeAttribute('aria-describedby');
+    helpCur = b;
+    helpPop.textContent = b.dataset.help;
+    helpPop.classList.add('on');
+    b.setAttribute('aria-describedby', 'sfa-help');
+    const r = b.getBoundingClientRect(), pw = helpPop.offsetWidth, ph = helpPop.offsetHeight;
+    const x = Math.max(8, Math.min(r.left + r.width / 2 - pw / 2, innerWidth - pw - 8));
+    let y = r.bottom + 8; if (y + ph > innerHeight - 8) y = Math.max(8, r.top - ph - 8);
+    helpPop.style.left = x + 'px'; helpPop.style.top = y + 'px';
+  }
+  function hideHelp() {
+    if (helpPop) helpPop.classList.remove('on');
+    if (helpCur) { helpCur.removeAttribute('aria-describedby'); helpCur.removeAttribute('aria-expanded'); }
+    helpPin = null; helpCur = null;
+  }
+  function help(text) {
+    if (!text) return null;
+    const b = el('button', { class: 'qh', type: 'button', 'aria-label': 'Wat betekent dit?', text: '?' });
+    b.dataset.help = text;
+    b.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse' && !helpPin) showHelp(b); });
+    b.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse' && !helpPin) hideHelp(); });
+    b.addEventListener('focus', () => { if (!helpPin) showHelp(b); });
+    b.addEventListener('blur', () => { if (helpPin !== b) hideHelp(); });
+    b.addEventListener('click', (e) => {
+      e.preventDefault(); e.stopPropagation();
+      if (helpPin === b) { hideHelp(); return; }
+      hideHelp(); showHelp(b); helpPin = b; b.setAttribute('aria-expanded', 'true');
+    });
+    b.addEventListener('keydown', (e) => { e.stopPropagation(); if (e.key === 'Escape') { hideHelp(); } });
+    return b;
+  }
+  document.addEventListener('click', () => { if (helpPin) hideHelp(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideHelp(); });
+  window.addEventListener('scroll', hideHelp, { passive: true, capture: true });
+  window.addEventListener('resize', hideHelp);
+
   // ---------------------------------------------------------------- state
   const S = {
     tab: 'overzicht', preset: '30d', from: null, to: null, compare: true, filters: {}, site: 'straightfwd.nl',
@@ -211,7 +423,7 @@
   // ---------------------------------------------------------------- components
   function card(title, opts = {}, ...body) {
     const act = el('div', { class: 'act' }, ...(opts.actions || []));
-    const head = el('div', { class: 'card-h' }, el('div', null, el('h3', { text: title }), opts.sub ? el('div', { class: 'sub', text: opts.sub }) : null), act);
+    const head = el('div', { class: 'card-h' }, el('div', null, el('h3', null, title, help(opts.info !== undefined ? opts.info : CARD[title])), opts.sub ? el('div', { class: 'sub', text: opts.sub }) : null), act);
     return el('section', { class: 'card ' + (opts.cls || '') + (opts.span ? ' span-' + opts.span : '') }, head, ...body);
   }
   function delta(cur, prev, upGood = true, isRate = false) {
@@ -228,7 +440,7 @@
   }
   function tile(label, value, dlt, spark, info) {
     return el('div', { class: 'tile' },
-      el('div', { class: 'lbl' }, label, info ? el('span', { class: 'info', title: info, text: 'i' }) : null),
+      el('div', { class: 'lbl' }, label, help(info || TERM[label])),
       el('div', { class: 'row' }, el('div', null, el('div', { class: 'val', text: value }), dlt), spark || null));
   }
   // rows: [{k, label, sub, vals:[...], bar}] cols: [{name, strong}]
@@ -236,7 +448,9 @@
     if (!rows.length) return el('div', { class: 'empty', text: opts.empty || 'Nog geen data in deze periode.' });
     const max = Math.max(...rows.map((r) => r.bar || 0), 1);
     const list = el('div', { class: 'blist', role: 'list' });
-    const head = el('div', { class: 'bhead' }, el('span', { text: opts.head || '' }), el('div', { class: 'vals' }, ...cols.map((c) => el('span', { text: c.name }))));
+    const colInfo = cols.map((c) => (c.info !== undefined ? c.info : TERM[c.name]));
+    const colW = cols.map((c, i) => Math.ceil(Math.max(42, c.name.length * 8.4 + (colInfo[i] ? 19 : 0), ...rows.map((r) => String(r.vals[i] ?? '').length * 8.2))) + 'px');
+    const head = el('div', { class: 'bhead' }, el('span', { text: opts.head || '' }), el('div', { class: 'vals' }, ...cols.map((c, i) => el('span', { style: { minWidth: colW[i] } }, c.name, help(colInfo[i])))));
     const limit = opts.limit || 8;
     const draw = (all) => {
       list.replaceChildren(head);
@@ -248,7 +462,7 @@
           onkeydown: opts.onClick ? (e) => { if (e.key === 'Enter') opts.onClick(r); } : null,
         },
         el('div', { class: 'nm' }, r.icon ? el('span', { class: 'muted', style: { display: 'inline-block', width: '20px' }, text: r.icon }) : null, r.label, r.sub ? el('small', { text: r.sub }) : null),
-        el('div', { class: 'vals' }, ...r.vals.map((v, i) => el('span', { class: cols[i] && cols[i].strong ? 'strong' : '', text: v }))),
+        el('div', { class: 'vals' }, ...r.vals.map((v, i) => el('span', { class: cols[i] && cols[i].strong ? 'strong' : '', style: { minWidth: colW[i] }, text: v }))),
         el('div', { class: 'bar' }, el('i', { style: { width: Math.max(0.5, (r.bar / max) * 100) + '%', background: r.color || 'var(--s1)' } })));
         list.append(row);
       });
@@ -272,9 +486,9 @@
       }
       const t = el('table', { class: 'tbl' });
       t.append(el('thead', null, el('tr', null, ...cols.map((c) => el('th', {
-        class: c.num ? 'num' : '', scope: 'col', 'aria-sort': sortKey === c.key ? (dir < 0 ? 'descending' : 'ascending') : null, text: c.name,
+        class: c.num ? 'num' : '', scope: 'col', 'aria-sort': sortKey === c.key ? (dir < 0 ? 'descending' : 'ascending') : null,
         onclick: () => { if (sortKey === c.key) dir = -dir; else { sortKey = c.key; dir = c.num ? -1 : 1; } draw(); },
-      })))));
+      }, c.name, c.name ? help(c.info !== undefined ? c.info : TERM[c.name]) : null)))));
       const tb = el('tbody');
       data.slice(0, all ? data.length : limit).forEach((r) => {
         tb.append(el('tr', null, ...cols.map((c) => {
@@ -306,7 +520,7 @@
   }
   function tableCard(title, sub, rows, cols, opts = {}) {
     const t = table(rows, cols, opts);
-    return card(title, { sub, span: opts.span || 12, actions: rows.length ? [csvBtn(opts.file || title.toLowerCase().replace(/\W+/g, '-'), () => ({ rows, cols }))] : [] }, t);
+    return card(title, { sub, span: opts.span || 12, info: opts.info, actions: rows.length ? [csvBtn(opts.file || title.toLowerCase().replace(/\W+/g, '-'), () => ({ rows, cols }))] : [] }, t);
   }
   function segBar(parts, opts = {}) {
     const total = parts.reduce((a, p) => a + p.v, 0) || 1;
@@ -423,7 +637,7 @@
     const total = lo + lk;
     const cr = rate(k.conv_sessions, k.sessions), crp = rate(p.conv_sessions, p.sessions);
     const hero = el('section', { class: 'card grad hero span-4' },
-      el('div', null, el('div', { class: 'lbl', text: 'Leads via de website' }),
+      el('div', null, el('div', { class: 'lbl' }, 'Leads via de website', help(HELP_MISC.hero)),
         el('div', { class: 'big', text: fmt.n(total) }), delta(total, leadsTotal(gp))),
       el('div', null,
         segBar([{ label: 'Opdrachtgevers', v: lo, color: 'var(--s1)' }, { label: 'Kandidaten', v: lk, color: 'var(--s2)' }], { thin: true, noLegend: true }),
@@ -444,7 +658,7 @@
     const pages = card('Populairste pagina’s', { span: 4, sub: 'Weergaven · bezoekers' }, barList(d.pages.map((r) => ({ label: r.k, vals: [fmt.n(r.views), fmt.n(r.visitors)], bar: r.views, k: r.k, title: r.title })),
       [{ name: 'Weerg.', strong: true }, { name: 'Bez.' }], { onClick: (r) => setFilter('path', r.k), head: 'Pagina' }));
     const svcRows = d.serviceGroups.map((sg) => { const r = d.groups.find((x) => x.k === sg) || { views: 0, visitors: 0, leads: 0, t: 0 }; return { label: sg, vals: [fmt.n(r.visitors), fmt.n(r.leads)], bar: r.visitors, k: sg }; }).sort((a, b) => b.bar - a.bar);
-    const services = card('Interesse per dienst', { span: 4, sub: 'Bezoekers op de dienstpagina · leads' }, barList(svcRows, [{ name: 'Bez.', strong: true }, { name: 'Leads' }], { onClick: (r) => setFilter('pgroup', r.k), head: 'Dienst' }));
+    const services = card('Interesse per dienst', { span: 4, sub: 'Bezoekers op de dienstpagina · leads' }, barList(svcRows, [{ name: 'Bez.', strong: true }, { name: 'Leads', info: 'Leads die via een formulier op deze dienstpagina binnenkwamen.' }], { onClick: (r) => setFilter('pgroup', r.k), head: 'Dienst' }));
 
     const f = d.funnels.opdrachtgever;
     const funnelCard = card('Funnel opdrachtgevers', { span: 6, sub: 'Sessies die elke stap haalden' }, funnel(f, ['Bezoek', 'Dienst- of contactpagina', 'Formulier in beeld', 'Formulier gestart', 'Formulier verstuurd', 'Lead ontvangen']));
@@ -460,7 +674,7 @@
     keys.forEach((k) => {
       const c = (d.goals[k] || {}).n || 0, pv = (d.prevGoals[k] || {}).n || 0;
       if (!c && !pv && ['bellen', 'download', 'form_fout'].includes(k)) return;
-      t.append(tile(d.goalLabels[k] || k, fmt.n(c), delta(c, pv, k !== 'form_fout')));
+      t.append(tile(d.goalLabels[k] || k, fmt.n(c), delta(c, pv, k !== 'form_fout'), null, GOAL_HELP[k]));
     });
     return t;
   }
@@ -472,7 +686,7 @@
     names.forEach((nm, i) => {
       const v = vals[i] || 0, pr = i ? vals[i - 1] || 0 : null;
       wrap.append(el('div', { class: 'fstep' },
-        el('div', { class: 'fl' }, el('span', { text: nm }), el('span', null, el('span', { class: 'n', text: fmt.n(v) }), el('span', { class: 'muted', text: ' · ' + fmt.pct(v / top) }))),
+        el('div', { class: 'fl' }, el('span', null, nm, help(FUNNEL[nm])), el('span', null, el('span', { class: 'n', text: fmt.n(v) }), el('span', { class: 'muted', text: ' · ' + fmt.pct(v / top) }))),
         el('div', { class: 'ftrack' }, el('i', { style: { width: (v / top) * 100 + '%' } })),
         i ? el('div', { class: 'drop', text: pr ? fmt.pct(v / pr) + ' van de vorige stap' + (pr - v > 0 ? ' · ' + fmt.n(pr - v) + ' afgehaakt' : '') : '' }) : null));
     });
@@ -519,7 +733,7 @@
     out.push(el('div', { class: 'grid g-12' },
       card('LinkedIn-impact', { span: 6, sub: 'Je posts en bedrijfspagina als bron' },
         el('div', { class: 'tiles', style: { gridTemplateColumns: 'repeat(3, minmax(0,1fr))', marginBottom: '14px' } },
-          tile('Sessies', fmt.n(li.s)), tile('Leads', fmt.n(li.l)), tile('Conversie', fmt.pct(rate(li.cs, li.s)))),
+          tile('Sessies', fmt.n(li.s), null, null, 'Sessies die via LinkedIn binnenkwamen.'), tile('Leads', fmt.n(li.l), null, null, 'Leads uit sessies die via LinkedIn binnenkwamen.'), tile('Conversie', fmt.pct(rate(li.cs, li.s)), null, null, 'Aandeel LinkedIn-sessies met minstens één lead.')),
         el('div', { class: 'muted', style: { fontSize: '12.5px', fontWeight: 600, margin: '4px 0 6px' }, text: 'Landingspagina’s vanaf LinkedIn' }),
         barList(liLanding.map((r) => ({ label: r.landing || '/', vals: [fmt.n(r.s), fmt.n(r.l)], bar: r.s, k: r.landing })), [{ name: 'Sessies', strong: true }, { name: 'Leads' }], { onClick: (r) => { S.filters.channel = 'LinkedIn'; setFilter('landing', r.k); }, limit: 5, empty: 'Nog geen bezoek vanaf LinkedIn.' }),
         el('div', { class: 'note', text: 'Tip: zet UTM-tags in je LinkedIn-links (bijv. ?utm_source=linkedin&utm_medium=social&utm_campaign=post-sourcing) om per post te zien wat het oplevert.' })),
@@ -528,7 +742,7 @@
           barList((dm.utm_source || []).filter((r) => r.k).map((r) => ({ label: r.k, vals: [fmt.n(r.s), fmt.n(r.l)], bar: r.s, k: r.k })), [{ name: 'Sessies', strong: true }, { name: 'Leads' }], { onClick: (r) => setFilter('utm_source', r.k), limit: 5 })) : null),
       card('Verwijzende websites', { span: 4, sub: 'Sessies · leads' }, barList(refs.map((r) => ({ label: r.k || '(geen)', vals: [fmt.n(r.s), fmt.n(r.l)], bar: r.s, k: r.k })), [{ name: 'Sessies', strong: true }, { name: 'Leads' }], { onClick: (r) => setFilter('ref', r.k) })),
       card('AI-assistenten (GEO)', { span: 4, sub: 'Bezoek via ChatGPT, Perplexity, Gemini, Copilot, Claude' },
-        el('div', { class: 'tiles', style: { gridTemplateColumns: 'repeat(2, minmax(0,1fr))', marginBottom: '12px' } }, tile('Sessies', fmt.n(ai.s)), tile('Leads', fmt.n(ai.l))),
+        el('div', { class: 'tiles', style: { gridTemplateColumns: 'repeat(2, minmax(0,1fr))', marginBottom: '12px' } }, tile('Sessies', fmt.n(ai.s), null, null, 'Sessies die via een AI-assistent binnenkwamen.'), tile('Leads', fmt.n(ai.l), null, null, 'Leads uit sessies die via een AI-assistent binnenkwamen.')),
         barList(refs.filter((r) => /chatgpt|openai|perplexity|gemini|copilot|claude|you\.com|phind|mistral|deepseek|grok/.test(r.k || '')).map((r) => ({ label: r.k, vals: [fmt.n(r.s)], bar: r.s, k: r.k })), [{ name: 'Sessies', strong: true }], { onClick: (r) => setFilter('ref', r.k), empty: 'Nog geen bezoek vanuit AI-assistenten.' })),
       card('Zoekmachines', { span: 4, sub: 'Organisch zoekverkeer per zoekmachine' }, barList(search.map((r) => ({ label: r.k, vals: [fmt.n(r.s), fmt.n(r.l)], bar: r.s, k: r.k })), [{ name: 'Sessies', strong: true }, { name: 'Leads' }], { onClick: (r) => setFilter('ref', r.k), empty: 'Nog geen zoekverkeer.' }),
         el('div', { class: 'note', text: 'Zoekwoorden zie je in Google Search Console; die geeft Google niet door aan websites.' }))));
@@ -546,7 +760,7 @@
     out.push(el('div', { class: 'grid g-12' }, tableCard('Paginagroepen', 'Diensten, vacatures, Fwd Match en meer', grp, [
       { key: 'k', name: 'Groep', onClick: (r) => setFilter('pgroup', r.k) }, { key: 'views', name: 'Weergaven', num: true, fmt: fmt.n }, { key: 'visitors', name: 'Bezoekers', num: true, fmt: fmt.n },
       { key: 't', name: 'Actieve tijd', num: true, fmt: fmt.dur }, { key: 'sc', name: 'Scrolldiepte', num: true, fmt: (v) => (v ? Math.round(v) + '%' : '–') },
-      { key: 'entries', name: 'Instappen', num: true, fmt: fmt.n }, { key: 'exitRate', name: 'Uitstap', num: true, fmt: (v) => fmt.pct(v, 0) }, { key: 'leads', name: 'Leads', num: true, fmt: fmt.n },
+      { key: 'entries', name: 'Instappen', num: true, fmt: fmt.n }, { key: 'exitRate', name: 'Uitstap', num: true, fmt: (v) => fmt.pct(v, 0) }, { key: 'leads', name: 'Leads', num: true, fmt: fmt.n, info: 'Leads die via een formulier op deze pagina binnenkwamen.' },
     ], { sort: 'views', file: 'paginagroepen' })));
     out.push(el('div', { style: { height: '16px' } }));
     const pg = d.pages.map((r) => ({ ...r, exitRate: rate(r.exits, r.views) }));
@@ -554,7 +768,7 @@
       { key: 'k', name: 'Pagina', onClick: (r) => setFilter('path', r.k), render: (r) => el('span', null, r.k, el('span', { class: 't2', text: r.title || '' })) },
       { key: 'views', name: 'Weergaven', num: true, fmt: fmt.n }, { key: 'visitors', name: 'Bezoekers', num: true, fmt: fmt.n },
       { key: 't', name: 'Actieve tijd', num: true, fmt: fmt.dur }, { key: 'sc', name: 'Scroll', num: true, fmt: (v) => (v ? Math.round(v) + '%' : '–') },
-      { key: 'entries', name: 'Instappen', num: true, fmt: fmt.n }, { key: 'exitRate', name: 'Uitstap', num: true, fmt: (v) => fmt.pct(v, 0) }, { key: 'leads', name: 'Leads', num: true, fmt: fmt.n },
+      { key: 'entries', name: 'Instappen', num: true, fmt: fmt.n }, { key: 'exitRate', name: 'Uitstap', num: true, fmt: (v) => fmt.pct(v, 0) }, { key: 'leads', name: 'Leads', num: true, fmt: fmt.n, info: 'Leads die via een formulier op deze pagina binnenkwamen.' },
       { key: 'hm', name: '', render: (r) => el('button', { class: 'mini-btn', type: 'button', text: 'Heatmap', title: 'Bekijk de heatmap van deze pagina', onclick: (e) => { e.stopPropagation(); openHeatmap(r.k); } }) },
     ], { sort: 'views', file: 'paginas' })));
     out.push(el('div', { style: { height: '16px' } }));
@@ -652,7 +866,7 @@
     const out = [];
     out.push(el('div', { class: 'tiles', style: { gridTemplateColumns: 'repeat(auto-fill, minmax(165px, 1fr))' } },
       tile('Vacatureweergaven', fmt.n(views)), tile('Overzichtspagina', fmt.n(overview ? overview.views : 0)),
-      tile('Sollicitaties', fmt.n(applies + (overview ? overview.applies : 0))), tile('Conversie vacature', fmt.pct(rate(applies, views))),
+      tile('Sollicitaties', fmt.n(applies + (overview ? overview.applies : 0)), null, null, 'Verstuurde sollicitaties op vacatures, inclusief sollicitaties via de overzichtspagina.'), tile('Conversie vacature', fmt.pct(rate(applies, views))),
       tile('Gedeeld', fmt.n(shares)), tile('Fwd Match-bezoekers', fmt.n(fm.visitors)), tile('Fwd Match-uploads', fmt.n(fm.leads))));
     out.push(el('div', { style: { height: '16px' } }));
     const rows = v.map((r) => ({ ...r, conv: rate(r.applies, r.views), name: (r.title || r.path).replace(/\s*\|.*$/, '') }));
@@ -660,7 +874,7 @@
       { key: 'name', name: 'Vacature', onClick: (r) => setFilter('path', r.path), render: (r) => el('span', null, r.name, el('span', { class: 't2', text: r.path })) },
       { key: 'views', name: 'Weergaven', num: true, fmt: fmt.n }, { key: 'visitors', name: 'Bezoekers', num: true, fmt: fmt.n },
       { key: 't', name: 'Actieve tijd', num: true, fmt: fmt.dur }, { key: 'fviews', name: 'Form. gezien', num: true, fmt: fmt.n }, { key: 'starts', name: 'Gestart', num: true, fmt: fmt.n },
-      { key: 'applies', name: 'Sollicitaties', num: true, fmt: fmt.n }, { key: 'conv', name: 'Conversie', num: true, fmt: (x) => fmt.pct(x) },
+      { key: 'applies', name: 'Sollicitaties', num: true, fmt: fmt.n }, { key: 'conv', name: 'Conversie', num: true, fmt: (x) => fmt.pct(x), info: 'Sollicitaties ÷ weergaven van deze vacature.' },
       { key: 'shares', name: 'Gedeeld', num: true, fmt: fmt.n }, { key: 'top', name: 'Grootste bron' },
     ], { sort: 'views', file: 'vacatures', empty: 'Nog geen vacatureweergaven in deze periode.' })));
     out.push(el('div', { style: { height: '16px' } }));
@@ -813,7 +1027,7 @@
     const map = new Map(L.perMin.map((r) => [new Date(r.m).toISOString().slice(0, 16), r.pv]));
     for (let i = 29; i >= 0; i--) { const t = new Date(now.getTime() - i * 60000); const k = t.toISOString().slice(0, 16); mins.push({ k, label: i === 0 ? 'nu' : '−' + i + 'm', tip: clock(t), v: map.get(k) || 0 }); }
     const hero = el('section', { class: 'card grad hero span-4' },
-      el('div', null, el('div', { class: 'lbl' }, el('span', { class: 'live-dot' + (L.now ? '' : ' off'), style: { display: 'inline-block', marginRight: '8px' } }), 'Nu op de site'),
+      el('div', null, el('div', { class: 'lbl' }, el('span', { class: 'live-dot' + (L.now ? '' : ' off'), style: { display: 'inline-block', marginRight: '8px' } }), 'Nu op de site', help(HELP_MISC.live)),
         el('div', { class: 'big', text: fmt.n(L.now) }), el('div', { class: 'muted', text: 'unieke bezoekers in de laatste 5 minuten' })),
       el('div', { class: 'muted', style: { fontSize: '12px' }, text: 'Ververst elke 10 seconden · ' + clock(L.serverTime) }));
     const chart = card('Paginaweergaven per minuut', { span: 8, sub: 'Laatste 30 minuten' }, C.columns({ values: mins.map((m) => m.v), labels: mins.map((m) => m.label), tipLabels: mins.map((m) => m.tip), name: 'weergaven', fmt: fmt.n, height: 190 }));
@@ -910,6 +1124,7 @@
     else if (m.type === 'sfa:ready') { hmReady = true; clearTimeout(hmTimer); hmStatus(''); sendHm(); }
   });
   function setHm(patch) {
+    hideHelp();
     Object.assign(S.hm, patch);
     writeHash();
     const side = $('#hm-side'), legend = $('#hm-legend'), ctl = $('#hm-modes');
@@ -922,7 +1137,8 @@
     const H = S.hm.data.heatmap || { totals: {} };
     const seg = (items, cur, on) => el('div', { class: 'seg' }, ...items.map(([k, label, n]) => el('button', { type: 'button', 'aria-pressed': String(cur === k), onclick: () => on(k) }, label, n !== undefined ? el('span', { class: 'cnt', text: fmt.n(n) }) : null)));
     return [
-      seg([['click', 'Klikken'], ['scroll', 'Scrollen'], ['attention', 'Aandacht']], S.hm.mode, (k) => setHm({ mode: k })),
+      seg([['click', 'Klikken'], ['scroll', 'Scrollen'], ['attention', 'Aandacht']], S.hm.mode, (k) => setHm({ mode: k })), help(HELP_MISC.hmMode),
+      S.hm.mode === 'click' ? help(HELP_MISC.hmLayer) : null,
       S.hm.mode === 'click' ? seg([['all', 'Alle klikken', H.totals.clicks], ['rage', 'Frustratie', H.totals.rage], ['dead', 'Dode klikken', H.totals.dead]], S.hm.layer, (k) => setHm({ layer: k })) : null,
     ];
   }
@@ -981,14 +1197,14 @@
       onclick: () => { if (S.hm.vb !== k) { S.hm.vb = k; writeHash(); loadHeatmap(); } },
     }, VB_LABEL[k], el('span', { class: 'cnt', text: fmt.n(cur['v' + k]) }))));
     const controls = el('div', { class: 'hm-controls' },
-      el('div', { class: 'hm-row' }, el('label', { class: 'hm-lbl', text: 'Pagina' }), sel, devSeg,
+      el('div', { class: 'hm-row' }, el('label', { class: 'hm-lbl', text: 'Pagina' }), sel, devSeg, help(HELP_MISC.hmDevice),
         el('a', { class: 'mini-btn', href: hmSrc(S.hm.path).replace(/\?sf_hm=1$/, ''), target: '_blank', rel: 'noopener', text: 'Open pagina ↗' })),
       el('div', { class: 'hm-row', id: 'hm-modes' }, ...hmModeControls()));
     const t = H.totals;
     const bottom = H.scroll && H.scroll.length ? H.scroll[H.scroll.length - 1] : null;
     const tiles = el('div', { class: 'tiles', style: { gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))' } },
       tile('Weergaven', fmt.n(t.pv), null, null, 'Weergaven van deze pagina op ' + VB_LABEL[S.hm.vb].toLowerCase() + ' in de gekozen periode.'),
-      tile('Klikken', fmt.n(t.clicks)), tile('Klikken per weergave', t.pv ? (t.clicks / t.pv).toLocaleString('nl-NL', { maximumFractionDigits: 1 }) : '–'),
+      tile('Klikken', fmt.n(t.clicks), null, null, 'Alle klikken op deze pagina op dit apparaat in de gekozen periode.'), tile('Klikken per weergave', t.pv ? (t.clicks / t.pv).toLocaleString('nl-NL', { maximumFractionDigits: 1 }) : '–'),
       tile('Gem. scrolldiepte', H.avgScroll !== null && H.avgScroll !== undefined ? Math.round(H.avgScroll) + '%' : '–'),
       tile('Haalt de onderkant', bottom === null ? '–' : fmt.pct(bottom, 0)),
       tile('Frustratieklikken', fmt.n(t.rage), null, null, 'Drie of meer snelle klikken op dezelfde plek.'),
@@ -1009,7 +1225,7 @@
     clearTimeout(hmTimer);
     hmTimer = setTimeout(() => { if (!hmReady) hmStatus('De pagina laat zich hier (nog) niet tonen. Staat de nieuwste meetcode al live op ' + S.site + '? De cijfers hiernaast kloppen wel.'); }, 12000);
     const noData = !t.pv;
-    const viewer = card(cur.title ? cur.title.replace(/\s*\|.*$/, '') : S.hm.path, { span: 8, sub: S.hm.path + ' · ' + VB_LABEL[S.hm.vb] + ' · ' + HM_W[S.hm.vb] + ' px breed' },
+    const viewer = card(cur.title ? cur.title.replace(/\s*\|.*$/, '') : S.hm.path, { span: 8, info: HELP_MISC.hmViewer, sub: S.hm.path + ' · ' + VB_LABEL[S.hm.vb] + ' · ' + HM_W[S.hm.vb] + ' px breed' },
       noData ? el('div', { class: 'banner', style: { marginBottom: '12px' } }, el('div', null, el('b', { text: 'Geen metingen voor deze pagina op ' + VB_LABEL[S.hm.vb].toLowerCase() }), 'Kies een ander apparaat of een langere periode.')) : null,
       stage,
       el('div', { class: 'hm-legend', id: 'hm-legend' }, ...hmLegend()),
@@ -1126,7 +1342,7 @@
     });
     const more = st.rows.length < st.total ? el('button', { class: 'pill-btn ghost', type: 'button', style: { marginTop: '12px' }, text: 'Meer sessies laden (' + fmt.n(st.total - st.rows.length) + ' over)', onclick: () => loadSessions(true) }) : null;
     return [
-      el('div', { class: 'controls', style: { marginBottom: '12px' } }, seg, el('span', { class: 'range-label', text: fmt.n(st.total) + (st.total === 1 ? ' sessie' : ' sessies') })),
+      el('div', { class: 'controls', style: { marginBottom: '12px' } }, seg, help(HELP_MISC.sesKind), el('span', { class: 'range-label', text: fmt.n(st.total) + (st.total === 1 ? ' sessie' : ' sessies') })),
       card('Bezoekersreizen', { span: 12, sub: 'Elke sessie stap voor stap: waar iemand vandaan kwam, wat hij bekeek en aanklikte, en waar hij afhaakte of converteerde. Anoniem: je ziet nooit wat er is ingevuld.' }, list, more),
     ];
   }
@@ -1193,7 +1409,7 @@
   function render() {
     const view = $('#view');
     const d = S.data;
-    C.hideTip();
+    C.hideTip(); hideHelp();
     if (S.tab === 'live') { view.replaceChildren(...viewLive()); return; }
     if (S.tab === 'info') { view.replaceChildren(...viewInfo()); return; }
     if (S.tab === 'heatmaps') { view.replaceChildren(...viewHeatmaps()); return; }
@@ -1216,6 +1432,7 @@
   function init() {
     initTheme();
     readHash();
+    $('#compare').after(help(HELP_MISC.compare));
     $('#compare').onclick = () => { S.compare = !S.compare; writeHash(); renderControls(); render(); };
     $('#applyRange').onclick = () => { const f = $('#from').value, t = $('#to').value; if (f && t) { S.from = f <= t ? f : t; S.to = f <= t ? t : f; load(); } };
     $('#theme').onclick = () => { S.theme = S.theme === 'dark' ? 'light' : 'dark'; document.documentElement.setAttribute('data-theme', S.theme); try { localStorage.setItem('sfa_theme', S.theme); } catch (e) {} render(); };

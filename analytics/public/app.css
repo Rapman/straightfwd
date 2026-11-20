@@ -189,6 +189,18 @@ a { color: var(--accent); }
 .delta.up { color: var(--up); } .delta.down { color: var(--down); } .delta.flat { color: var(--muted); }
 .tile svg.spark { display: block; }
 .info { display: inline-grid; place-items: center; width: 15px; height: 15px; border-radius: 50%; border: 1px solid var(--axis); font-size: 10px; color: var(--muted); cursor: help; font-weight: 700; }
+/* ?-uitleg bij elke metric */
+.qh { display: inline-grid; place-items: center; flex: none; width: 16px; height: 16px; padding: 0; margin: 0 0 0 5px; border-radius: 50%; border: 1px solid var(--axis); background: transparent; color: var(--muted); font: 700 10.5px/1 var(--font); letter-spacing: 0; text-transform: none; cursor: help; vertical-align: 1px; transition: background .12s, color .12s, border-color .12s; }
+.qh:hover, .qh:focus-visible, .qh[aria-expanded="true"] { background: var(--accent); border-color: var(--accent); color: #fff; outline: none; }
+.tile .lbl .qh, .card-h h3 .qh, .bhead .qh, .hero .lbl .qh { margin-left: 0; }
+.card-h h3 { display: flex; align-items: center; gap: 6px; }
+.hero .lbl { display: flex; align-items: center; gap: 6px; }
+.bhead .vals span { display: inline-flex; align-items: center; justify-content: flex-end; gap: 3px; }
+.controls > .qh, .hm-row > .qh { margin-left: -4px; }
+.help-pop { position: fixed; z-index: 120; left: 0; top: 0; max-width: min(320px, calc(100vw - 16px)); background: var(--ink); color: var(--surface); border-radius: 12px; padding: 10px 13px; font-size: 12.5px; line-height: 1.5; font-weight: 500; letter-spacing: 0; text-transform: none; box-shadow: 0 10px 30px rgba(0,0,0,.25); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .1s; }
+:root[data-theme="dark"] .help-pop { background: #F4F6FF; color: #070B24; }
+.help-pop.on { opacity: 1; visibility: visible; }
+@media print { .qh, .help-pop { display: none !important; } }
 
 /* ---- bar lists & tables ------------------------------------------------------ */
 .blist { display: flex; flex-direction: column; gap: 2px; }
